@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,13 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.viewmodel.MainActivityviewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,17 +28,22 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+       // MainActivityviewModel = ViewModelProviders.of(this).get(MainActivityviewModel!!::class.java)
+        getActivityMainActivity()
+        binding!!.fab.setOnClickListener { view ->
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val intent = Intent(this,Experiments::class.java)
+            startActivity(intent)
         }
+
+    }
+
+    private fun getActivityMainActivity() {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
