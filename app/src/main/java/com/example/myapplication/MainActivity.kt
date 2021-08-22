@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var MainActivityviewModel:MainActivityviewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,14 +33,15 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-       // MainActivityviewModel = ViewModelProviders.of(this).get(MainActivityviewModel!!::class.java)
         getActivityMainActivity()
         binding!!.fab.setOnClickListener { view ->
 
             val intent = Intent(this,Experiments::class.java)
             startActivity(intent)
+            //MainActivityviewModel.delete()
         }
-        
+
+
 
     }
 
@@ -68,4 +70,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
 }
